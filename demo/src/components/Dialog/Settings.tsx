@@ -78,7 +78,7 @@ export const useSettingsTabs = () => {
   }, [graphName])
 
   const enableGreetingsOrPromptMemo: { greeting: boolean, prompt: boolean } = React.useMemo(() => {
-    if (graphName === "va_gemini_v2v") {
+    if (graphName === "va_gemini_v2v" || graphName === "va_glm_v2v") {
       return {
         greeting: false,
         prompt: true,
@@ -289,7 +289,7 @@ export const cozeSettingsFormSchema = z.object({
       message: "Bot ID is required",
     })
     .min(1),
-  base_url: z.nativeEnum(ECozeBaseUrl).default(ECozeBaseUrl.GLOBAL),
+  base_url: z.nativeEnum(ECozeBaseUrl).default(ECozeBaseUrl.CN),
 })
 
 export const isCozeGraph = (graphName: string) => {
@@ -363,9 +363,6 @@ export function CozeSettingsTab(props: {
                     <SelectValue placeholder="Select base URL" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value={ECozeBaseUrl.GLOBAL}>
-                      {ECozeBaseUrl.GLOBAL}
-                    </SelectItem>
                     <SelectItem value={ECozeBaseUrl.CN}>
                       {ECozeBaseUrl.CN}
                     </SelectItem>
@@ -390,7 +387,7 @@ export function CozeSettingsTab(props: {
                 form.reset({
                   token: "",
                   bot_id: "",
-                  base_url: ECozeBaseUrl.GLOBAL,
+                  base_url: ECozeBaseUrl.CN,
                 })
                 dispatch(resetCozeSettings())
                 toast.success("Coze settings reset")

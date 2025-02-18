@@ -261,6 +261,13 @@ export const getGraphProperties = (
                 "azure_synthesis_voice_name": voiceNameMap[language]["azure"][voiceType]
             }
         }
+    } else if (graphName == "va_glm_v2v") {
+        return {
+            "v2v": {
+                "prompt": prompt,
+                // "greeting": combined_greeting,
+            },
+        }
     }
 
 
